@@ -33,3 +33,8 @@ Ethernet trunk interface (Switchport mode { mode})hỗ trợ nhiều loại Trun
 - desirable | auto ----> mode trunk
 - desirable | desirable ----> mode trunk
 - desirable | trunk ----> mode trunk
+
+
+- NOTE: When configuring port security, by default the learned MAC addresses are flushed when the switch is reloaded. To prevent this and ensure that the switch preserves MAC addresses that are dynamically learned via port security, you need to configure sticky learning. This configuration, in conjunction with the copy run start command, saves the learned MAC addresses to NVRAM. This means that when the
+switch is rebooted, the MAC addresses learned are not lost. The switch adds the switchport port-security mac-address sticky <mac-address> command dynamically under the interface for every sticky dynamically learned MAC address. So if 100 MAC addresses are learned this way, the switch would add 100 of these statements after the switchport port-security mac-address sticky command that you issued under the
+interface. Be very careful because this can create a very large configuration file in the real world
